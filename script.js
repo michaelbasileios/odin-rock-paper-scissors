@@ -9,24 +9,28 @@ console.log(computerSelection);
 //get player selection from prompt 
 const playerSelection = prompt("Make your choice: ");
 
-//function to take two parameters from comp and player, compare them and declare winner
+//function to take two parameters from comp and player, compare them and declare result
 function playRound(computerSelection, playerSelection) {
-    if (playerSelection === computerSelection) {
-        return `Draw! Both picked ${computerSelection}`;
-    } else if (playerSelection === `Rock` && computerSelection === `Paper`) {
-        return `You lose! Computer picked ${computerSelection}`;
-    } else if (playerSelection === `Rock` && computerSelection === 'Scissors') {
-        return `You win! Computer picked ${computerSelection}`;
-    } else if (playerSelection === `Paper` && computerSelection === `Rock`) {
-        return `You win! Computer picked ${computerSelection}`;
-    } else if (playerSelection === `Paper` && computerSelection === `Scissors`) {
-        return `You lose! Computer picked ${computerSelection}`;
-    } else if (playerSelection === `Scissors` && computerSelection === `Rock`) {
-        return `You lose! Computer picked ${computerSelection}`;
-    } else if (playerSelection === `Scissors` && computerSelection === `Paper`) {
-        return `You win! Computer picked ${computerSelection}`;
+    let victoryMsg = `You win! Computer picked ${computerSelection}.`;
+    let defeatMsg = `You lose! Computer picked ${computerSelection}.`;
+    let drawMsg = `Draw! Both picked ${computerSelection}.`;
+    let invalidMsg = `Invalid entry. Try again.`
+    if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+        return drawMsg;
+    } else if (playerSelection.toLowerCase() === `rock` && computerSelection.toLowerCase() === `paper`) {
+        return defeatMsg;
+    } else if (playerSelection.toLowerCase() === `rock` && computerSelection.toLowerCase() === 'scissors') {
+        return victoryMsg;
+    } else if (playerSelection.toLowerCase() === `paper` && computerSelection.toLowerCase() === `rock`) {
+        return victoryMsg;
+    } else if (playerSelection.toLowerCase() === `paper` && computerSelection.toLowerCase() === `scissors`) {
+        return defeatMsg;
+    } else if (playerSelection.toLowerCase() === `scissors` && computerSelection.toLowerCase() === `rock`) {
+        return defeatMsg;
+    } else if (playerSelection.toLowerCase() === `scissors` && computerSelection.toLowerCase() === `paper`) {
+        return victoryMsg;
     } else {
-        return `Invalid entry. Try again!`;
+        return invalidMsg;
     }
 }
 console.log(playRound(computerSelection, playerSelection));
