@@ -1,7 +1,7 @@
 // Function (getComputerChoice) to make computer output a random choice from 3 options 
-let options = ["rock", "paper", "scissors"];
-function getComputerChoice(options) {
-    return options[Math.floor(Math.random() * options.length)];
+const selections = ["rock", "paper", "scissors"];
+function getComputerChoice(array) {
+    return array[Math.floor(Math.random() * array.length)];
 }
-let computerSelection = getComputerChoice(options);
+const computerSelection = getComputerChoice(selections);
 console.log(computerSelection);
