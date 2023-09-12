@@ -38,12 +38,21 @@ function playRound(computerSelection, playerSelection) {
         return invalidMsg
     }
 }
-console.log(playRound(computerSelection, playerSelection));
+//console.log(playRound(computerSelection, playerSelection));
 
 
 function game() {
     for (let i = 0; i < 5; i++) {
         console.log(playRound(computerSelection, playerSelection));
         console.log([`Wins: ${wins}`, `Losses: ${losses}`]);
+    }
+    console.log(`Total Score:- ` + `Wins: ${wins}, ` + `Losses: ${losses}`);
+    if (wins > losses) {
+        console.log("Victory!");
+    } else if (wins === losses) {
+        console.log("Tie!")
+    } 
+    else {
+        console.log("Defeat!");
     }
 }
