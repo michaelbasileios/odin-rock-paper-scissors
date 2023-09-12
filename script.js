@@ -3,33 +3,36 @@ const selections = ["Rock", "Paper", "Scissors"];
 function getComputerChoice(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
-const computerSelection = getComputerChoice(selections);
-console.log(computerSelection);
+
+// console.log(computerSelection); //temp
 
 //get player selection from prompt 
-const playerSelection = prompt("Make your choice: ");
+let wins = 0;
+let losses = 0;
+let computerSelection = getComputerChoice(selections).toLowerCase();
+let playerSelection;
 
 //function to take two parameters from comp and player, compare them and declare result
 function playRound(computerSelection, playerSelection) {
+    playerSelection = prompt("Make your choice: ").toLowerCase();
     const victoryMsg = `You win! Computer picked ${computerSelection}.`;
     const defeatMsg = `You lose! Computer picked ${computerSelection}.`;
     const drawMsg = `Draw! Both picked ${computerSelection}.`;
     const invalidMsg = `Invalid entry. Try again.`
+
     if (playerSelection === undefined || playerSelection === null) {
         return invalidMsg;
-    } else if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+    } else if (playerSelection === computerSelection) {
         return drawMsg;
-    } else if (playerSelection.toLowerCase() === `rock` && computerSelection.toLowerCase() === `paper`) {
+    } else if (playerSelection === `rock` && computerSelection === `paper` || 
+               playerSelection === `paper` && computerSelection === `scissors` || 
+               playerSelection === `scissors` && computerSelection === `rock`) {
+        losses++
         return defeatMsg;
-    } else if (playerSelection.toLowerCase() === `rock` && computerSelection.toLowerCase() === 'scissors') {
-        return victoryMsg;
-    } else if (playerSelection.toLowerCase() === `paper` && computerSelection.toLowerCase() === `rock`) {
-        return victoryMsg;
-    } else if (playerSelection.toLowerCase() === `paper` && computerSelection.toLowerCase() === `scissors`) {
-        return defeatMsg;
-    } else if (playerSelection.toLowerCase() === `scissors` && computerSelection.toLowerCase() === `rock`) {
-        return defeatMsg;
-    } else if (playerSelection.toLowerCase() === `scissors` && computerSelection.toLowerCase() === `paper`) {
+    } else if (playerSelection === `rock` && computerSelection === 'scissors' ||
+               playerSelection === `paper` && computerSelection === `rock` ||
+               playerSelection === `scissors` && computerSelection === `paper`) {
+        wins++
         return victoryMsg;
     } else {
         return invalidMsg
@@ -37,13 +40,10 @@ function playRound(computerSelection, playerSelection) {
 }
 console.log(playRound(computerSelection, playerSelection));
 
-//function to play game of 5 rounds
-// function game() {
-//   return playRound(computerSelection, playerSelection);
 
-//     // for (let i = 1; i <= 5; i++) {
-//     //     playRound(computerSelection, playerSelection);
-//     // }
-// }
-
-// console.log(game());
+function game() {
+    for (let i = 0; i < 5; i++) {
+        console.log(playRound(computerSelection, playerSelection));
+        console.log([`Wins: ${wins}`, `Losses: ${losses}`]);
+    }
+}
