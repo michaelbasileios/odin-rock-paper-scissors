@@ -1,5 +1,5 @@
 // Function (getComputerChoice) to make computer output a random choice from 3 options 
-const selections = ["Rock", "Paper", "Scissors"];
+const options = ["Rock", "Paper", "Scissors"];
 function getComputerChoice(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
@@ -9,7 +9,7 @@ function getComputerChoice(array) {
 //get player selection from prompt 
 let wins = 0;
 let losses = 0;
-let computerSelection = getComputerChoice(selections).toLowerCase();
+let computerSelection = getComputerChoice(options).toLowerCase();
 let playerSelection;
 
 //function to take two parameters from comp and player, compare them and declare result
