@@ -14,15 +14,19 @@ let playerSelection;
 
 //function to take two parameters from comp and player, compare them and declare result
 function playRound(computerSelection, playerSelection) {
-    playerSelection = prompt("Make your choice: ").toLowerCase();
+    playerSelection = prompt("Make your choice: ");
     const victoryMsg = `You win! Computer picked ${computerSelection}.`;
     const defeatMsg = `You lose! Computer picked ${computerSelection}.`;
     const drawMsg = `Draw! Both picked ${computerSelection}.`;
     const invalidMsg = `Invalid entry. Try again.`
 
-    if (playerSelection === undefined || playerSelection === null) {
+    if (playerSelection === "" || playerSelection === null) {
         return invalidMsg;
-    } else if (playerSelection === computerSelection) {
+    } 
+    
+    playerSelection = playerSelection.toLowerCase();
+
+    if (playerSelection === computerSelection) {
         return drawMsg;
     } else if (playerSelection === `rock` && computerSelection === `paper` || 
                playerSelection === `paper` && computerSelection === `scissors` || 
