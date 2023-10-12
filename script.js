@@ -52,7 +52,6 @@ function playRound(computerSelection, playerSelection) {
         return invalidMsg
     }
 }
-//console.log(playRound(computerSelection, playerSelection));
 
 //FUNCTION TO PLAY 5 ROUNDS
 // function game() {
