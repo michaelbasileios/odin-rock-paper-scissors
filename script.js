@@ -1,43 +1,53 @@
-// Function (getComputerChoice) to make computer output a random choice from 3 options 
-const options = ["Rock", "Paper", "Scissors"];
+//BASIC CONSTANTS
+const ROCK = "rock";
+const PAPER = "paper";
+const SCISSORS = "scissors";
+const options = [ROCK, PAPER, SCISSORS];
+
+// FUNCTION TO GET RANDOM CHOICE FROM AN ARRAY 
 function getComputerChoice(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
-
-// console.log(computerSelection); //temp
-
-//get player selection from prompt 
+//SCORE VARIABLES 
 let wins = 0;
 let losses = 0;
-let computerSelection = getComputerChoice(options).toLowerCase();
-let playerSelection;
 
-//function to take two parameters from comp and player, compare them and declare result
+//EVENT LISTENER ON BUTTON CONTAINER
+const btnContainer = document.querySelector('#button-container')
+btnContainer.addEventListener('click', clickListen);
+
+//FUNCTION TO PLAY ROUND ON BUTTON CLICK
+function clickListen(event) {
+    if (event.target.tagName !== 'BUTTON') {
+        return;
+    }
+    const computerSelection = getComputerChoice(options);
+    const playerSelection = event.target.id;
+    playRound(computerSelection, playerSelection);
+}
+//FUNCTION TO PLAY A SINGLE ROUND
 function playRound(computerSelection, playerSelection) {
-    playerSelection = prompt("Make your choice: ");
-    const victoryMsg = `You win! Computer picked ${computerSelection}.`;
-    const defeatMsg = `You lose! Computer picked ${computerSelection}.`;
-    const drawMsg = `Draw! Both picked ${computerSelection}.`;
+    const victoryMsg = `You win! Computer picked ${computerSelection.toUpperCase()}.`;
+    const defeatMsg = `You lose! Computer picked ${computerSelection.toUpperCase()}.`;
+    const drawMsg = `Draw! Both picked ${computerSelection.toUpperCase()}.`;
     const invalidMsg = `Invalid entry. Try again.`
 
     if (playerSelection === "" || playerSelection === null) {
         return invalidMsg;
-    } 
-    
-    playerSelection = playerSelection.toLowerCase();
+    }
 
     if (playerSelection === computerSelection) {
-        return drawMsg;
-    } else if (playerSelection === `rock` && computerSelection === `paper` || 
-               playerSelection === `paper` && computerSelection === `scissors` || 
-               playerSelection === `scissors` && computerSelection === `rock`) {
+        results.textContent = drawMsg;
+    } else if (playerSelection === ROCK && computerSelection === PAPER || 
+               playerSelection === PAPER && computerSelection === SCISSORS || 
+               playerSelection === SCISSORS && computerSelection === ROCK) {
         losses++
-        return defeatMsg;
-    } else if (playerSelection === `rock` && computerSelection === 'scissors' ||
-               playerSelection === `paper` && computerSelection === `rock` ||
-               playerSelection === `scissors` && computerSelection === `paper`) {
+        results.textContent = defeatMsg;
+    } else if (playerSelection === ROCK && computerSelection === SCISSORS ||
+               playerSelection === PAPER && computerSelection === ROCK ||
+               playerSelection === SCISSORS && computerSelection === PAPER) {
         wins++
-        return victoryMsg;
+        results.textContent = victoryMsg;
     } else {
         return invalidMsg
     }
