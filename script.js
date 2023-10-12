@@ -11,6 +11,21 @@ function getComputerChoice(array) {
 //SCORE VARIABLES 
 let wins = 0;
 let losses = 0;
+const results = document.querySelector('#results');
+const playerScr = document.querySelector('#player-score');
+const compScr = document.querySelector('#computer-score');
+const winDeclare = document.querySelector('#win-declaration');
+
+//FUNCTION TO DECLARE FIRST TO REACH 5 POINTS AS WINNER
+const declareWinner = () => {
+    if (wins >= 5) {
+        alert("VICTORY!");
+        location.reload();
+    } else if (losses >= 5) {
+        alert("DEFEAT!");
+        location.reload();
+    }
+}
 
 //EVENT LISTENER ON BUTTON CONTAINER
 const btnContainer = document.querySelector('#button-container')
@@ -27,45 +42,52 @@ function clickListen(event) {
 }
 //FUNCTION TO PLAY A SINGLE ROUND
 function playRound(computerSelection, playerSelection) {
+    //RESULT MESSAGES
     const victoryMsg = `You win! Computer picked ${computerSelection.toUpperCase()}.`;
     const defeatMsg = `You lose! Computer picked ${computerSelection.toUpperCase()}.`;
     const drawMsg = `Draw! Both picked ${computerSelection.toUpperCase()}.`;
-    const invalidMsg = `Invalid entry. Try again.`
-
-    if (playerSelection === "" || playerSelection === null) {
-        return invalidMsg;
+    //ROUND RESULT FUNCTION
+    function playerWins() {
+        wins++
+        results.textContent = victoryMsg;
+        playerScr.textContent = wins;
+        declareWinner();
     }
-
+    function compWins() {
+        losses++
+        results.textContent = defeatMsg;
+        compScr.textContent = losses;
+        declareWinner();
+    }
+    //GAME LOGIC
     if (playerSelection === computerSelection) {
         results.textContent = drawMsg;
     } else if (playerSelection === ROCK) {
         if (computerSelection === SCISSORS) {
-            wins++
-            results.textContent = victoryMsg;
+            playerWins();
         } else {
-            losses++
-            results.textContent = defeatMsg;
+            compWins();
         }
     } else if (playerSelection === PAPER) {
         if (computerSelection === ROCK) {
-            wins++
-            results.textContent = victoryMsg;
+            playerWins();
         } else {
-            losses++
-            results.textContent = defeatMsg;
+            compWins();
         }
     } else if (playerSelection === SCISSORS) {
         if (computerSelection === PAPER) {
-            wins++
-            results.textContent = victoryMsg; 
+            playerWins(); 
         } else {
-            losses++
-            results.textContent = defeatMsg;
+            compWins();
         }
     } else {
         return invalidMsg
     }
 }
+
+
+
+
 
 //FUNCTION TO PLAY 5 ROUNDS
 // function game() {
