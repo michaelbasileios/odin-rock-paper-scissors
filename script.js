@@ -38,16 +38,30 @@ function playRound(computerSelection, playerSelection) {
 
     if (playerSelection === computerSelection) {
         results.textContent = drawMsg;
-    } else if (playerSelection === ROCK && computerSelection === PAPER || 
-               playerSelection === PAPER && computerSelection === SCISSORS || 
-               playerSelection === SCISSORS && computerSelection === ROCK) {
-        losses++
-        results.textContent = defeatMsg;
-    } else if (playerSelection === ROCK && computerSelection === SCISSORS ||
-               playerSelection === PAPER && computerSelection === ROCK ||
-               playerSelection === SCISSORS && computerSelection === PAPER) {
-        wins++
-        results.textContent = victoryMsg;
+    } else if (playerSelection === ROCK) {
+        if (computerSelection === SCISSORS) {
+            wins++
+            results.textContent = victoryMsg;
+        } else {
+            losses++
+            results.textContent = defeatMsg;
+        }
+    } else if (playerSelection === PAPER) {
+        if (computerSelection === ROCK) {
+            wins++
+            results.textContent = victoryMsg;
+        } else {
+            losses++
+            results.textContent = defeatMsg;
+        }
+    } else if (playerSelection === SCISSORS) {
+        if (computerSelection === PAPER) {
+            wins++
+            results.textContent = victoryMsg; 
+        } else {
+            losses++
+            results.textContent = defeatMsg;
+        }
     } else {
         return invalidMsg
     }
